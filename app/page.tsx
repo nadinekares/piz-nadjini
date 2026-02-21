@@ -28,15 +28,26 @@ export default function Home() {
       const portraitVisible = getComputedStyle(portraitLogo).display !== "none";
       const activeLogo = portraitVisible ? portraitLogo : landscapeLogo;
       const leftAttach = portraitVisible ? 0.8 : 0.65;
-      const rightAttach = portraitVisible ? 0.9 : 0.85;
+      const rightAttach = portraitVisible ? 0.88 : 0.85;
+      const overlapNudge = portraitVisible ? 60 : 0;
+      const minOverlapPx = portraitVisible ? 20 : 10;
 
       const stageRect = stage.getBoundingClientRect();
       const logoRect = activeLogo.getBoundingClientRect();
       const logoTopInStage = logoRect.top - stageRect.top;
       const targetTopInStage = logoTopInStage + leftAttach * logoRect.height;
+      const rightDelta = (rightAttach - leftAttach) * logoRect.height;
+      let rowMarginTop = targetTopInStage - stageRect.height - overlapNudge;
 
-      setCardsRowMarginTop(targetTopInStage - stageRect.height);
-      setRightCardMarginTop((rightAttach - leftAttach) * logoRect.height);
+      const rightTopInStage = stageRect.height + rowMarginTop + rightDelta;
+      const maxRightTopToTouch = logoTopInStage + logoRect.height - minOverlapPx;
+
+      if (rightTopInStage > maxRightTopToTouch) {
+        rowMarginTop -= rightTopInStage - maxRightTopToTouch;
+      }
+
+      setCardsRowMarginTop(rowMarginTop);
+      setRightCardMarginTop(rightDelta);
     };
 
     updateLayout();
@@ -99,41 +110,43 @@ export default function Home() {
           aria-hidden
         >
           <div className="grid w-full grid-cols-2 gap-4 md:gap-6">
-            <article className="relative aspect-[3/4] min-h-[16rem] w-full overflow-hidden rounded-2xl sm:min-h-[18rem] md:aspect-[4/5] md:min-h-[12.5rem]">
-              <motion.div
-                className="absolute inset-0"
-                initial={{ y: "100vh" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Image
-                  src="/images/hero/piz-nadjini-card-01.jpg"
-                  alt="Piz Nadjini hero image card 1"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </motion.div>
-            </article>
+            <motion.article
+              className="relative aspect-[3/4] min-h-[16rem] w-full overflow-hidden rounded-2xl sm:min-h-[18rem] md:aspect-[4/5] md:min-h-[12.5rem]"
+              initial={{ y: "100vh" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Image
+                src="/images/hero/piz-nadjini-card-01.jpg"
+                alt="Piz Nadjini hero image card 1"
+                fill
+                className="object-cover"
+                sizes="50vw"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_56%,rgba(0,0,0,0.18)_100%)]"
+              />
+            </motion.article>
 
             <motion.article
               className="relative aspect-[3/4] min-h-[16rem] w-full overflow-hidden rounded-2xl sm:min-h-[18rem] md:aspect-[4/5] md:min-h-[12.5rem]"
               style={{ marginTop: rightCardMarginTop }}
+              initial={{ y: "110vh" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.65, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <motion.div
-                className="absolute inset-0"
-                initial={{ y: "110vh" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.65, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Image
-                  src="/images/hero/piz-nadjini-card-02.jpg"
-                  alt="Piz Nadjini hero image card 2"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </motion.div>
+              <Image
+                src="/images/hero/piz-nadjini-card-02.jpg"
+                alt="Piz Nadjini hero image card 2"
+                fill
+                className="object-cover"
+                sizes="50vw"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_56%,rgba(0,0,0,0.18)_100%)]"
+              />
             </motion.article>
           </div>
         </motion.div>
