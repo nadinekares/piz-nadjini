@@ -151,6 +151,7 @@
     transition:
       width 260ms cubic-bezier(0.22, 1, 0.36, 1),
       height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-radius 260ms cubic-bezier(0.22, 1, 0.36, 1),
       opacity 220ms ease;
   }
 
@@ -158,14 +159,54 @@
     opacity: 1;
   }
 
-  .custom-cursor.is-active {
+  .custom-cursor.is-button-merged {
+    opacity: 0;
+  }
+
+  .custom-cursor.is-active:not(.is-button-merged) {
     width: 46px;
     height: 46px;
+  }
+
+  [data-slot="button"] {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  [data-slot="button"]::after {
+    content: "";
+    position: absolute;
+    left: var(--cursor-fill-x, 50%);
+    top: var(--cursor-fill-y, 50%);
+    width: 2px;
+    height: 2px;
+    border-radius: 999px;
+    background: #ffffff;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%) scale(var(--cursor-fill-scale, 0));
+    transform-origin: center;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 140ms ease;
+    z-index: 1;
+  }
+
+  [data-slot="button"][data-cursor-merge="active"]::after,
+  [data-slot="button"][data-cursor-merge="closing"]::after {
+    opacity: 1;
   }
 
   @supports not (mix-blend-mode: difference) {
     .custom-cursor {
       --cursor-color: #111111;
+      mix-blend-mode: normal;
+    }
+
+    [data-slot="button"]::after {
+      background: rgb(255 255 255 / 0.85);
       mix-blend-mode: normal;
     }
   }

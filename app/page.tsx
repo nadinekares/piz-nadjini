@@ -352,9 +352,9 @@ function AboutSection() {
                         aria-hidden
                         className="text-balance text-[1.9rem] leading-[0.95] font-semibold tracking-[-0.04em] text-zinc-300 pb-[0.16em] sm:text-[2.7rem]"
                       >
-                        Piz Nadjini is where every thread and every track is designed to sparkle.
-                        {" "}Fill the night with color and the soul with sound. Be bold, be
-                        {" "}bright, be yourself.
+                        Piz Nadjini is where everything is designed to sparkle.
+                        {" "}To fill the night with color and the soul with sound. To be bold,
+                        {" "}to be bright, to be yourself.
                       </p>
 
                       <motion.p
@@ -362,9 +362,9 @@ function AboutSection() {
                         style={{ clipPath: mobileHeadlineRevealClipPath }}
                         className="absolute inset-0 text-balance text-[1.9rem] leading-[0.95] font-semibold tracking-[-0.04em] text-zinc-900 pb-[0.16em] sm:text-[2.7rem]"
                       >
-                        Piz Nadjini is where every thread and every track is designed to sparkle.
-                        {" "}Fill the night with color and the soul with sound. Be bold, be
-                        {" "}bright, be yourself.
+                        Piz Nadjini is where everything is designed to sparkle.
+                        {" "}To fill the night with color and the soul with sound. To be bold,
+                        {" "}to be bright, to be yourself.
                       </motion.p>
                     </div>
 
@@ -373,9 +373,9 @@ function AboutSection() {
                         aria-hidden
                         className="text-[1.9rem] leading-[0.95] font-semibold tracking-[-0.04em] text-zinc-300 pb-[0.16em] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[4.15rem] xl:text-[4.65rem]"
                       >
-                        Piz Nadjini is where every thread and every track is designed to sparkle.
-                        {" "}Fill the night with color and the soul with sound. Be bold, be
-                        {" "}bright, be yourself.
+                        Piz Nadjini is where everything is designed to sparkle.
+                        {" "}To fill the night with color and the soul with sound. To be bold,
+                        {" "}to be bright, to be yourself.
                       </p>
 
                       <motion.p
@@ -383,16 +383,16 @@ function AboutSection() {
                         style={{ clipPath: headlineRevealClipPath }}
                         className="absolute inset-0 text-[1.9rem] leading-[0.95] font-semibold tracking-[-0.04em] text-zinc-900 pb-[0.16em] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[4.15rem] xl:text-[4.65rem]"
                       >
-                        Piz Nadjini is where every thread and every track is designed to sparkle.
-                        {" "}Fill the night with color and the soul with sound. Be bold, be
-                        {" "}bright, be yourself.
+                        Piz Nadjini is where everything is designed to sparkle.
+                        {" "}To fill the night with color and the soul with sound. To be bold,
+                        {" "}to be bright, to be yourself.
                       </motion.p>
                     </div>
 
                     <p className="sr-only">
-                      Piz Nadjini is where every thread and every track is
-                      designed to sparkle. Fill the night with color and the
-                      soul with sound. Be bold, be bright, be yourself.
+                      Piz Nadjini is where everything is designed to sparkle. To
+                      fill the night with color and the soul with sound. To be
+                      bold, to be bright, to be yourself.
                     </p>
                   </div>
                 </motion.div>
