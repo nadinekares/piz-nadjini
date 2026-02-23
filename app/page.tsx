@@ -1,8 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import Link from "next/link";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+import { Button } from "@/components/ui/button";
 
 const aboutImageCards = [
   {
@@ -121,6 +130,8 @@ export default function Home() {
 
   return (
     <main className="w-full bg-[#FFFFFF]">
+      <MinimalNavigation />
+
       <section ref={heroRef} className="w-full" aria-label="Piz Nadjini hero">
         <motion.div
           ref={logoStageRef}
@@ -203,6 +214,7 @@ export default function Home() {
       </section>
 
       <AboutSection />
+      <MinimalFooter />
 
       <style jsx>{`
         .logo-landscape {
@@ -224,6 +236,70 @@ export default function Home() {
         }
       `}</style>
     </main>
+  );
+}
+
+function MinimalNavigation() {
+  const { scrollY } = useScroll();
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
+  const directionThreshold = 4;
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = lastScrollYRef.current;
+
+    if (latest <= 8) {
+      setIsVisible(true);
+      lastScrollYRef.current = latest;
+      return;
+    }
+
+    if (latest > previous + directionThreshold) {
+      setIsVisible(false);
+    } else if (latest < previous - directionThreshold) {
+      setIsVisible(true);
+    }
+
+    lastScrollYRef.current = latest;
+  });
+
+  return (
+    <motion.header
+      initial={false}
+      animate={isVisible ? "shown" : "hidden"}
+      variants={{
+        shown: { y: 0 },
+        hidden: { y: "-120%" },
+      }}
+      transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+      className="pointer-events-none fixed inset-x-0 top-0 z-40 px-4 py-4 md:px-6 md:py-5"
+    >
+      <nav className="mx-auto flex w-full max-w-[90rem] items-center justify-between">
+        <Link
+          href="/"
+          aria-label="Piz Nadjini home"
+          className="pointer-events-auto inline-flex items-center"
+        >
+          <Image
+            src="/images/logo/piznadjinisignet_black.svg"
+            alt="Piz Nadjini"
+            width={48}
+            height={48}
+            priority
+            className="size-8 sm:size-9"
+            sizes="(min-width: 640px) 36px, 32px"
+          />
+        </Link>
+
+        <Button
+          asChild
+          size="sm"
+          className="pointer-events-auto rounded-full border border-black bg-white/90 px-4 text-[0.7rem] font-medium tracking-[0.08em] text-black uppercase shadow-none backdrop-blur-sm hover:bg-white"
+        >
+          <a href="#contact">Contact</a>
+        </Button>
+      </nav>
+    </motion.header>
   );
 }
 
@@ -355,6 +431,121 @@ function AboutSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function MinimalFooter() {
+  return (
+    <footer id="contact" className="relative overflow-hidden bg-black text-white">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-8 px-4 py-14 md:px-6 md:py-20">
+        <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-stretch">
+          <p className="text-2xl leading-[0.95] font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
+            <span className="block">be bold.</span>
+            <span className="block">be bright.</span>
+            <span className="block">be you.</span>
+          </p>
+
+          <div className="flex flex-col items-start gap-3 md:self-stretch md:items-end md:justify-between">
+            <div className="flex flex-col items-start gap-3 md:items-end">
+              <Link
+                href="/about"
+                className="text-[0.7rem] leading-none font-medium tracking-[0.08em] uppercase text-white/90 transition-colors hover:text-white"
+              >
+                About
+              </Link>
+              <Link
+                href="/music"
+                className="text-[0.7rem] leading-none font-medium tracking-[0.08em] uppercase text-white/90 transition-colors hover:text-white"
+              >
+                Music
+              </Link>
+              <Link
+                href="/fashion"
+                className="text-[0.7rem] leading-none font-medium tracking-[0.08em] uppercase text-white/90 transition-colors hover:text-white"
+              >
+                Fashion
+              </Link>
+            </div>
+
+            <Button
+              asChild
+              size="sm"
+              className="rounded-full border border-white bg-transparent px-4 text-[0.7rem] font-medium tracking-[0.08em] text-white uppercase shadow-none hover:bg-white hover:text-black"
+            >
+              <a href="#contact">Contact</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <FooterMarquee />
+    </footer>
+  );
+}
+
+const footerMarqueeImages = [
+  "/images/hero/piz-nadjini-card-01.jpg",
+  "/images/about/piz-nadjini-about-01.jpg",
+  "/images/hero/piz-nadjini-card-02.jpg",
+  "/images/about/piz-nadjini-about-02.jpg.jpg",
+  "/images/about/piz-nadjini-about-03.jpg.jpg",
+  "/images/about/piz-nadjini-about-04.jpg.jpg",
+] as const;
+
+function FooterMarquee() {
+  return (
+    <div className="relative border-t border-white/15 py-5 md:py-7">
+      <motion.div
+        aria-hidden
+        className="flex w-max"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: 120, ease: "linear", repeat: Number.POSITIVE_INFINITY }}
+      >
+        <FooterMarqueeSequence />
+        <FooterMarqueeSequence />
+      </motion.div>
+    </div>
+  );
+}
+
+function FooterMarqueeSequence() {
+  return (
+    <div className="flex shrink-0 items-center gap-2 pr-2 md:gap-3 md:pr-3">
+      {footerMarqueeImages.map((src) => (
+        <Fragment key={src}>
+          <FooterMarqueeLogo />
+          <FooterMarqueeImage src={src} />
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+function FooterMarqueeLogo() {
+  return (
+    <div className="relative h-16 w-[22rem] shrink-0 sm:h-20 sm:w-[28rem] md:h-24 md:w-[33rem]">
+      <Image
+        src="/images/logo/piznadjinilogo_black_horizontal.svg"
+        alt=""
+        fill
+        className="object-contain brightness-0 invert"
+        sizes="(min-width: 768px) 528px, (min-width: 640px) 448px, 352px"
+      />
+    </div>
+  );
+}
+
+function FooterMarqueeImage({ src }: { src: string }) {
+  return (
+    <div className="relative h-16 w-24 overflow-hidden rounded-lg border border-white/20 sm:h-20 sm:w-32 md:h-24 md:w-36">
+      <Image
+        src={src}
+        alt=""
+        fill
+        className="object-cover"
+        sizes="(min-width: 768px) 144px, (min-width: 640px) 128px, 96px"
+      />
+    </div>
   );
 }
 
