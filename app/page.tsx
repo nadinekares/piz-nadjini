@@ -17,49 +17,49 @@ const aboutImageCards = [
   {
     src: "/images/about/piz-nadjini-about-01.jpg",
     alt: "About section image 1",
-    mobileClassName: "left-2 top-18 w-[8.5rem] sm:left-4 sm:top-20 sm:w-[10rem]",
+    mobileClassName: "left-2 top-14 w-[9rem] sm:left-4 sm:top-16 sm:w-[10.5rem]",
     className:
       "md:-left-10 md:top-8 md:w-[16rem] lg:-left-20 lg:w-[19rem] xl:-left-28",
     aspectClassName: "aspect-[4/5]",
     delay: 0.05,
-    mobileFloatY: [36, -520] as const,
-    floatY: [120, -820] as const,
+    mobileFloatY: [20, -1100] as const,
+    floatY: [120, -1100] as const,
   },
   {
     src: "/images/about/piz-nadjini-about-02.jpg.jpg",
     alt: "About section image 2",
     mobileClassName:
-      "right-3 top-28 w-[4.75rem] sm:right-5 sm:top-32 sm:w-[5.75rem]",
+      "right-2 top-44 w-[5rem] sm:right-4 sm:top-48 sm:w-[6.25rem]",
     className:
       "md:left-6 md:bottom-14 md:w-[6.5rem] lg:left-2 lg:bottom-8 lg:w-[8rem] xl:-left-2",
     aspectClassName: "aspect-square",
     delay: 0.12,
-    mobileFloatY: [26, -420] as const,
-    floatY: [72, -720] as const,
+    mobileFloatY: [12, -980] as const,
+    floatY: [72, -980] as const,
   },
   {
     src: "/images/about/piz-nadjini-about-03.jpg.jpg",
     alt: "About section image 3",
     mobileClassName:
-      "left-4 bottom-28 w-[5.25rem] sm:left-8 sm:bottom-32 sm:w-[6.5rem]",
+      "left-3 top-[112svh] w-[6rem] sm:left-6 sm:top-[108svh] sm:w-[7.25rem]",
     className:
       "md:-right-4 md:top-2 md:w-[8rem] lg:-right-10 lg:top-4 lg:w-[10rem] xl:-right-16",
     aspectClassName: "aspect-[3/4]",
     delay: 0.18,
-    mobileFloatY: [42, -500] as const,
-    floatY: [88, -760] as const,
+    mobileFloatY: [10, -1450] as const,
+    floatY: [88, -1180] as const,
   },
   {
     src: "/images/about/piz-nadjini-about-04.jpg.jpg",
     alt: "About section image 4",
     mobileClassName:
-      "right-2 bottom-16 w-[9.25rem] sm:right-4 sm:bottom-20 sm:w-[11rem]",
+      "right-2 top-[134svh] w-[10rem] sm:right-5 sm:top-[126svh] sm:w-[12rem]",
     className:
       "md:right-4 md:bottom-6 md:w-[17rem] lg:-right-8 lg:bottom-0 lg:w-[21rem] xl:-right-[4.5rem]",
     aspectClassName: "aspect-[4/5]",
     delay: 0.25,
-    mobileFloatY: [60, -640] as const,
-    floatY: [150, -980] as const,
+    mobileFloatY: [6, -1700] as const,
+    floatY: [150, -1500] as const,
   },
 ] as const;
 
@@ -328,7 +328,7 @@ function AboutSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white px-4 py-[4.5rem] md:px-6 md:py-0"
+      className="relative bg-white px-4 pt-8 pb-[4.5rem] md:px-6 md:py-0"
       aria-label="About Piz Nadjini"
     >
       <div className="relative mx-auto max-w-[90rem]">
@@ -339,7 +339,7 @@ function AboutSection() {
           <div className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
             <div className="relative grid h-[100svh] place-items-center md:h-screen">
               <div className="relative mx-auto grid w-full max-w-5xl place-items-center md:min-h-[42rem] lg:min-h-[46rem]">
-                <div className="relative z-10 mx-auto max-w-4xl pt-8 text-center md:pt-0">
+                <div className="relative z-10 mx-auto max-w-4xl text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -438,15 +438,15 @@ function MinimalFooter() {
   return (
     <footer id="contact" className="relative overflow-hidden bg-black text-white">
       <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-8 px-4 py-14 md:px-6 md:py-20">
-        <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-stretch">
+        <div className="flex w-full items-start justify-between gap-6 md:items-stretch md:gap-10">
           <p className="text-2xl leading-[0.95] font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
             <span className="block">be bold.</span>
             <span className="block">be bright.</span>
             <span className="block">be you.</span>
           </p>
 
-          <div className="flex flex-col items-start gap-3 md:self-stretch md:items-end md:justify-between">
-            <div className="flex flex-col items-start gap-3 md:items-end">
+          <div className="flex shrink-0 flex-col items-end gap-3 self-stretch justify-between">
+            <div className="flex flex-col items-end gap-3">
               <Link
                 href="/about"
                 className="text-[0.7rem] leading-none font-medium tracking-[0.08em] uppercase text-white/90 transition-colors hover:text-white"
@@ -567,12 +567,13 @@ function AboutFloatingImageCard({
   overlayClassName: string;
 }) {
   const y = useTransform(scrollYProgress, [0, 1], [floatRange[0], floatRange[1]]);
+  const opacity = useTransform(scrollYProgress, [0, 0.84, 0.96, 1], [1, 1, 0, 0]);
 
   return (
     <motion.figure
-      style={{ y }}
-      initial={{ opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      style={{ y, opacity }}
+      initial={{ scale: 0.96 }}
+      whileInView={{ scale: 1 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: 0.65,
