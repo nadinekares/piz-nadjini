@@ -73,6 +73,7 @@ rm -rf landing-temp
 - Store all image assets in Next.js `public/` directory.
 - Use clear subfolders when needed (e.g. `public/images/hero`, `public/images/logos`).
 - Reference images from root-relative paths (e.g. `/images/hero/main-visual.webp`).
+- Always optimize images before uploading/adding them to the project (resize/compress, prefer modern formats like WebP when appropriate).
 
 ## UI Defaults
 - Default theme must be **light mode**.
@@ -128,7 +129,7 @@ rm -rf landing-temp
 ### Performance and SEO
 - Optimize Core Web Vitals (especially LCP and CLS).
 - Use `next/image` for responsive image delivery.
-- Compress/resize media assets before shipping.
+- Compress/resize media assets before shipping (and ideally before committing them).
 - Keep bundle size lean; avoid unnecessary dependencies.
 - Add metadata, Open Graph tags, and structured page titles/descriptions.
 
