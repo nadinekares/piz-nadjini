@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 export const metadata: Metadata = {
   title: "Piz Nadjini | DJ & Kimono Designer",
@@ -26,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

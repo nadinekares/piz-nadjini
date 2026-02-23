@@ -126,3 +126,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-enabled,
+  .custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
