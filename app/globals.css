@@ -171,7 +171,6 @@
   [data-slot="button"] {
     position: relative;
     overflow: hidden;
-    isolation: isolate;
   }
 
   [data-slot="button"]::after {
@@ -197,6 +196,14 @@
   [data-slot="button"][data-cursor-merge="active"]::after,
   [data-slot="button"][data-cursor-merge="closing"]::after {
     opacity: 1;
+  }
+
+  /* Prevent native hover colors from fighting the merge overlay on dark buttons. */
+  [data-slot="button"][data-cursor-merge-theme="dark"][data-cursor-merge="active"]:hover,
+  [data-slot="button"][data-cursor-merge-theme="dark"][data-cursor-merge="closing"]:hover {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
   }
 
   @supports not (mix-blend-mode: difference) {

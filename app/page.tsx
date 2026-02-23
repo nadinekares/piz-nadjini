@@ -470,6 +470,7 @@ function MinimalFooter() {
             <Button
               asChild
               size="sm"
+              data-cursor-merge-theme="dark"
               className="rounded-full border border-white bg-transparent px-4 text-[0.7rem] font-medium tracking-[0.08em] text-white uppercase shadow-none hover:bg-white hover:text-black"
             >
               <a href="#contact">Contact</a>
