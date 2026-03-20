@@ -214,6 +214,7 @@ export default function Home() {
       </section>
 
       <AboutSection />
+      <ContactSection />
       <MinimalFooter />
 
       <style jsx>{`
@@ -296,7 +297,7 @@ function MinimalNavigation() {
           size="sm"
           className="pointer-events-auto rounded-full border border-black bg-white/90 px-4 text-[0.7rem] font-medium tracking-[0.08em] text-black uppercase shadow-none backdrop-blur-sm hover:bg-white"
         >
-          <a href="#contact">Contact</a>
+          <Link href="/contact">Contact</Link>
         </Button>
       </nav>
     </motion.header>
@@ -434,9 +435,105 @@ function AboutSection() {
   );
 }
 
+function ContactSection() {
+  return (
+    <section
+      id="contact"
+      className="relative isolate overflow-hidden px-4 py-14 md:px-6 md:py-20"
+      aria-label="Contact form"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_16%_18%,rgba(255,222,233,0.95),transparent_44%),radial-gradient(circle_at_84%_10%,rgba(255,131,164,0.7),transparent_42%),radial-gradient(circle_at_74%_86%,rgba(225,29,72,0.62),transparent_48%),linear-gradient(145deg,#fff1f6_0%,#ff96b1_46%,#e11d48_100%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 opacity-40 mix-blend-overlay [background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.17)_0px,rgba(255,255,255,0.17)_1px,transparent_1px,transparent_3px),repeating-linear-gradient(90deg,rgba(0,0,0,0.06)_0px,rgba(0,0,0,0.06)_1px,transparent_1px,transparent_4px)] [background-size:150px_150px,130px_130px]"
+      />
+
+      <div className="relative z-10 mx-auto grid w-full max-w-[90rem] gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-lg"
+        >
+          <p className="text-[0.7rem] font-medium tracking-[0.1em] text-zinc-700 uppercase">
+            Contact
+          </p>
+          <h2 className="mt-3 text-balance text-4xl leading-[0.95] font-semibold tracking-[-0.03em] text-zinc-900 sm:text-5xl">
+            Let&apos;s create your next moment.
+          </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-700 sm:text-base">
+            Share your event details or collaboration idea and I&apos;ll get back to you.
+          </p>
+        </motion.div>
+
+        <form
+          className="w-full rounded-2xl border border-zinc-900/10 bg-white p-5 shadow-[0_24px_60px_-35px_rgba(0,0,0,0.3)] sm:p-7 md:p-8"
+        >
+          <div className="flex flex-col gap-4">
+            <label htmlFor="contact-name" className="space-y-2">
+              <span className="block text-[0.68rem] font-semibold tracking-[0.1em] text-zinc-600 uppercase">
+                Name
+              </span>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 transition-colors outline-none placeholder:text-zinc-400 focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10"
+                placeholder="Your name"
+              />
+            </label>
+
+            <label htmlFor="contact-email" className="space-y-2">
+              <span className="block text-[0.68rem] font-semibold tracking-[0.1em] text-zinc-600 uppercase">
+                Email
+              </span>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 transition-colors outline-none placeholder:text-zinc-400 focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10"
+                placeholder="you@example.com"
+              />
+            </label>
+
+            <label htmlFor="contact-message" className="space-y-2">
+              <span className="block text-[0.68rem] font-semibold tracking-[0.1em] text-zinc-600 uppercase">
+                Message
+              </span>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={6}
+                required
+                className="w-full resize-y rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 transition-colors outline-none placeholder:text-zinc-400 focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10"
+                placeholder="Tell me about your project, event, or timeline."
+              />
+            </label>
+          </div>
+
+          <Button
+            type="submit"
+            className="mt-5 w-full rounded-full border border-black bg-black py-6 text-[0.74rem] font-medium tracking-[0.08em] text-white uppercase shadow-none hover:bg-white hover:text-black sm:mt-6 sm:w-auto sm:px-8 sm:py-5"
+          >
+            Send Message
+          </Button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
 function MinimalFooter() {
   return (
-    <footer id="contact" className="relative overflow-hidden bg-black text-white">
+    <footer className="relative overflow-hidden bg-black text-white">
       <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-8 px-4 py-14 md:px-6 md:py-20">
         <div className="flex w-full items-start justify-between gap-6 md:items-stretch md:gap-10">
           <p className="text-2xl leading-[0.95] font-semibold tracking-[-0.03em] sm:text-3xl md:text-4xl">
@@ -473,7 +570,7 @@ function MinimalFooter() {
               data-cursor-merge-theme="dark"
               className="rounded-full border border-white bg-transparent px-4 text-[0.7rem] font-medium tracking-[0.08em] text-white uppercase shadow-none hover:bg-white hover:text-black"
             >
-              <a href="#contact">Contact</a>
+              <Link href="/contact">Contact</Link>
             </Button>
           </div>
         </div>
