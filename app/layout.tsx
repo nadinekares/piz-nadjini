@@ -6,12 +6,6 @@ export const metadata: Metadata = {
   title: "Piz Nadjini | DJ & Kimono Designer",
   description:
     "Minimal landing page for Piz Nadjini, a DJ and kimono designer blending sound and style.",
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
-    ],
-  },
   openGraph: {
     title: "Piz Nadjini | DJ & Kimono Designer",
     description:
